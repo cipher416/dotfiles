@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+show_system() {
+  local choice
+  choice="$(printf '%s\n' \
+    'Lock' \
+    'Clipboard' \
+    'Keybindings' \
+    'Suspend' \
+    'Log out' \
+    'Reboot' \
+    'Power off' | fuzzel --dmenu --prompt 'System > ')" || exit 0
+
+  case "$choice" in
+    Lock) hyprlock ;;
+    Clipboard) show_clipboard ;;
+    Keybindings) show_keybindings ;;
+    Suspend) systemctl suspend ;;
+    'Log out') uwsm stop ;;
+    Reboot) systemctl reboot ;;
+    'Power off') systemctl poweroff ;;
+  esac
+}
+
+show_clipboard() {
+  local choice
+  choice="$(cliphist list | fuzzel --dmenu --prompt 'Clipboard > ')" || exit 0
+  [[ -n "$choice" ]] || exit 0
+  printf '%s' "$choice" | cliphist decode | wl-copy
+}
+
+show_keybindings() {
+  fuzzel --dmenu --prompt 'Keybindings > ' <<'EOF'
+Super + Space                 Vicinae launcher
+Super + R                     Fuzzel fallback
+Super + Alt + Space           System menu
+Super + K                     Search keybindings
+Super + Return                Terminal
+Super + Shift + Return        Browser
+Super + Shift + F             File manager
+Super + Shift + N             Neovim
+Super + Shift + E             Zed
+Super + Shift + C             Cursor
+Super + Shift + D             Lazydocker
+Super + Ctrl + T              Btop
+Super + W                     Close window
+Super + T                     Toggle floating
+Super + J                     Toggle split direction
+Super + F                     Full screen
+Super + Alt + F               Full width
+Super + Arrow                 Move focus
+Super + Shift + Arrow         Swap window
+Super + 1..0                  Switch workspace
+Super + Shift + 1..0          Move window and follow
+Super + Shift + Alt + 1..0    Move window silently
+Super + Tab                   Next workspace
+Super + Shift + Tab           Previous workspace
+Super + S                     Toggle scratchpad
+Super + Alt + S               Send window to scratchpad
+Super + G                     Toggle window group
+Super + C / X / V             Universal copy / cut / paste
+Super + Ctrl + V              Vicinae clipboard history
+Super + Shift + S             Region screenshot with Hyprshot
+Print                         Region screenshot
+Shift + Print                 Full desktop screenshot
+Super + Ctrl + L              Lock
+Super + Shift + Space         Toggle top bar
+Super + comma                 Dismiss notification
+EOF
+}
+
+case "${1:-system}" in
+  system) show_system ;;
+  clipboard) show_clipboard ;;
+  keybindings) show_keybindings ;;
+  *) exit 2 ;;
+esac

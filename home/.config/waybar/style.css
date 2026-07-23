@@ -1,0 +1,153 @@
+* {
+  font-family: "SF Pro Text", sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0.92);
+  color: #888888;
+  border-bottom: 1px solid #262626;
+}
+
+button {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: #666666;
+  background: transparent;
+}
+
+button:hover {
+  color: #ededed;
+  background: #1a1a1a;
+}
+
+#workspaces button {
+  padding: 0 10px;
+  margin: 4px 2px;
+  border-radius: 5px;
+}
+
+#workspaces button.active {
+  color: #000000;
+  background: #ededed;
+}
+
+#workspaces button.urgent {
+  color: #ffffff;
+  background: #e5484d;
+}
+
+#window {
+  padding-left: 12px;
+  color: #666666;
+}
+
+#clock {
+  color: #ededed;
+  font-weight: 700;
+  padding: 0 8px;
+}
+
+#mpris {
+  color: #ededed;
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid #262626;
+  border-radius: 5px;
+  margin: 4px 6px 4px 0;
+  padding: 0 10px;
+}
+
+#mpris.paused,
+#mpris.stopped {
+  color: #888888;
+}
+
+#privacy,
+#custom-system {
+  padding: 0 9px;
+  border-left: 1px solid #1f1f1f;
+}
+
+#telemetry,
+#tray {
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid #262626;
+  border-radius: 6px;
+  margin: 4px 3px;
+}
+
+#telemetry {
+  font-family: "SFMono Nerd Font Mono";
+  font-size: 10px;
+}
+
+#cpu,
+#memory,
+#network,
+#wireplumber {
+  color: #888888;
+  padding: 1px 8px 0;
+}
+
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#wireplumber:hover {
+  color: #ededed;
+  background: #1a1a1a;
+}
+
+#tray {
+  padding: 0 8px;
+}
+
+#custom-system {
+  font-family: "SFMono Nerd Font Mono";
+  font-size: 14px;
+  color: #000000;
+  background: #ededed;
+  font-weight: 700;
+  margin: 4px 6px 4px 4px;
+  border-radius: 5px;
+}
+
+#custom-system:hover {
+  background: #ffffff;
+}
+
+#custom-system:active {
+  background: #b4b4b4;
+}
+
+#cpu.warning,
+#memory.warning {
+  color: #d4d4d4;
+}
+
+#cpu.critical,
+#memory.critical,
+#wireplumber.muted,
+#network.disconnected {
+  color: #e5484d;
+}
+
+#privacy-item.screenshare,
+#privacy-item.audio-in {
+  color: #ffffff;
+}
+
+tooltip {
+  background: #0a0a0a;
+  border: 1px solid #333333;
+  border-radius: 6px;
+}
+
+tooltip label {
+  color: #ededed;
+  padding: 6px;
+}

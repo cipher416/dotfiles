@@ -1,0 +1,5 @@
+apple-fonts
+apple_cursor
+apple_hyprcursor
+vicinae-bin
+zen-browser-bin

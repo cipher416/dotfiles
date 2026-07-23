@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if systemctl --user is-active --quiet waybar.service; then
+  systemctl --user kill --signal=SIGUSR1 waybar.service
+else
+  systemctl --user start waybar.service
+fi

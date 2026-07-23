@@ -1,0 +1,14 @@
+# Runtime and editor state
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.swp
+*~
+
+# Vicinae writes runtime state beside its user configuration.
+home/.config/vicinae/vicinae.json
+home/.local/share/vicinae/clipboard-data/
+home/.local/share/vicinae/extensions/
+home/.local/share/vicinae/favicon-data/
+home/.local/share/vicinae/support/

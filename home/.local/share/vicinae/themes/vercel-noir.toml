@@ -1,0 +1,74 @@
+[meta]
+name = "Vercel Noir"
+description = "True-black Vercel-inspired theme for the Hanabi desktop"
+variant = "dark"
+inherits = "vicinae-dark"
+
+[colors.core]
+accent = "#ededed"
+accent_foreground = "#000000"
+background = "#000000"
+foreground = "#ededed"
+secondary_background = "#0a0a0a"
+border = "#262626"
+
+[colors.main_window]
+border = "#333333"
+footer = { background = "#0a0a0a" }
+
+[colors.settings_window]
+border = "#333333"
+
+[colors.accents]
+blue = "#0070f3"
+green = "#46a758"
+magenta = "#8e4ec6"
+orange = "#f5a623"
+red = "#e5484d"
+yellow = "#f5d90a"
+cyan = "#00a3a3"
+purple = "#8e4ec6"
+
+[colors.shortcut]
+border = "#333333"
+
+[colors.text]
+default = "#ededed"
+muted = "#888888"
+danger = "#e5484d"
+success = "#46a758"
+placeholder = "#666666"
+selection = { background = "#ededed", foreground = "#000000" }
+
+[colors.text.links]
+default = "#3291ff"
+visited = "#8e4ec6"
+
+[colors.input]
+border = "#262626"
+border_focus = "#ededed"
+border_error = "#e5484d"
+
+[colors.button.primary]
+background = "#ededed"
+foreground = "#000000"
+hover = { background = "#ffffff" }
+focus = { outline = "#ffffff" }
+
+[colors.list.item.selection]
+background = "#ededed"
+foreground = "#000000"
+secondary_background = "#d4d4d4"
+secondary_foreground = "#1a1a1a"
+
+[colors.grid.item]
+background = "#0a0a0a"
+hover = { outline = "#888888" }
+selection = { outline = "#ffffff" }
+
+[colors.scrollbars]
+background = "#333333"
+
+[colors.loading]
+bar = "#ffffff"
+spinner = "#ffffff"

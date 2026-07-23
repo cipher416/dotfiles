@@ -1,0 +1,91 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 0,
+  "on-sigusr1": "toggle",
+  "on-sigusr2": "reload",
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["mpris", "clock"],
+  "modules-right": ["privacy", "group/telemetry", "tray", "custom/system"],
+
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "active-only": false,
+    "format": "{name}",
+    "on-click": "activate"
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 70,
+    "separate-outputs": true
+  },
+  "clock": {
+    "format": "{:%a %H:%M}",
+    "format-alt": "{:%Y-%m-%d %H:%M:%S}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+  "mpris": {
+    "format": "{status_icon} {dynamic}",
+    "format-paused": "{status_icon} {dynamic}",
+    "tooltip-format": "{player}: {dynamic}",
+    "max-length": 48,
+    "status-icons": {
+      "playing": "▶",
+      "paused": "Ⅱ",
+      "stopped": "■"
+    },
+    "on-click": "playerctl play-pause",
+    "on-click-middle": "playerctl previous",
+    "on-click-right": "playerctl next"
+  },
+  "group/telemetry": {
+    "orientation": "horizontal",
+    "modules": ["cpu", "memory", "network", "wireplumber"]
+  },
+  "cpu": {
+    "interval": 3,
+    "format": " {usage}%",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
+    "on-click": "ghostty -e btop"
+  },
+  "memory": {
+    "interval": 3,
+    "format": " {percentage}%",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
+    "on-click": "ghostty -e btop"
+  },
+  "network": {
+    "interval": 5,
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-linked": "󰈀",
+    "format-disconnected": "󰖪",
+    "tooltip-format": "{ifname}: {ipaddr}"
+  },
+  "wireplumber": {
+    "format": " {volume}%",
+    "format-muted": "󰝟",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "scroll-step": 5
+  },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 12
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 8
+  },
+  "custom/system": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "hypr-menu system"
+  }
+}

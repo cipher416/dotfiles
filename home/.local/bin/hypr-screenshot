@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+directory="$HOME/Pictures/Screenshots"
+file="$directory/$(date +'%Y-%m-%d_%H-%M-%S').png"
+mkdir -p "$directory"
+
+if [[ "${1:-region}" == "full" ]]; then
+  grim "$file"
+else
+  geometry="$(slurp)" || exit 0
+  [[ -n "$geometry" ]] || exit 0
+  grim -g "$geometry" "$file"
+fi
+
+wl-copy --type image/png < "$file"
+notify-send 'Screenshot saved' "$file"
