@@ -181,6 +181,8 @@ hl.bind("SUPER + SHIFT + LEFT", hl.dsp.window.swap({ direction = "l" }))
 hl.bind("SUPER + SHIFT + RIGHT", hl.dsp.window.swap({ direction = "r" }))
 hl.bind("SUPER + SHIFT + UP", hl.dsp.window.swap({ direction = "u" }))
 hl.bind("SUPER + SHIFT + DOWN", hl.dsp.window.swap({ direction = "d" }))
+hl.bind("SUPER + CTRL + RIGHT", hl.dsp.window.move({ monitor = "+1" }))
+hl.bind("SUPER + CTRL + LEFT", hl.dsp.window.move({ monitor = "-1" }))
 
 for workspace = 1, 10 do
   local key = "code:" .. tostring(workspace + 9)

@@ -14,7 +14,7 @@ tracked_paths=(
   .config/fuzzel
   .config/mako
   .config/btop
-  .config/cava
+  .config/cava/waybar.conf
   .config/vicinae/settings.json
   .local/bin/hypr-menu
   .local/bin/hypr-audio-output
