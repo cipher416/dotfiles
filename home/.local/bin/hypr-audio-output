@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+list_sinks() {
+  local default_info default_id
+
+  default_info="$(wpctl inspect @DEFAULT_AUDIO_SINK@)"
+  [[ "$default_info" =~ ^id[[:space:]]+([0-9]+), ]] || return 1
+  default_id="${BASH_REMATCH[1]}"
+
+  pw-dump | jq -r --argjson default_id "$default_id" '
+    [
+      .[]
+      | select(.type == "PipeWire:Interface:Node")
+      | select(.info.props["media.class"] == "Audio/Sink")
+      | {
+          id: .id,
+          name: (
+            .info.props["node.description"]
+            // .info.props["node.nick"]
+            // .info.props["node.name"]
+          )
+        }
+    ]
+    | sort_by([(.id != $default_id), .name])
+    | .[]
+    | [
+        .id,
+        ((if .id == $default_id then "● " else "  " end) + .name)
+      ]
+    | @tsv
+  '
+}
+
+if [[ "${1:-}" == "--list" ]]; then
+  list_sinks
+  exit
+fi
+
+choice="$(
+  list_sinks | fuzzel \
+    --dmenu \
+    --prompt 'Output > ' \
+    --with-nth=2 \
+    --only-match \
+    --no-sort \
+    --minimal-lines \
+    --no-run-if-empty
+)" || exit 0
+
+sink_id="${choice%%$'\t'*}"
+sink_name="${choice#*$'\t'}"
+sink_name="${sink_name#"● "}"
+sink_name="${sink_name#"  "}"
+
+[[ "$sink_id" =~ ^[0-9]+$ ]] || exit 1
+wpctl set-default "$sink_id"
+notify-send --app-name Audio 'Output switched' "$sink_name"

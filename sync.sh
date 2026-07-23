@@ -17,6 +17,7 @@ tracked_paths=(
   .config/cava
   .config/vicinae/settings.json
   .local/bin/hypr-menu
+  .local/bin/hypr-audio-output
   .local/bin/hypr-screenshot
   .local/bin/hypr-waybar-toggle
   .local/bin/waybar-cava
