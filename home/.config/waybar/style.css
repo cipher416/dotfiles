@@ -67,6 +67,31 @@ button:hover {
   color: #888888;
 }
 
+#custom-cava {
+  min-width: 48px;
+  margin: 4px 6px 4px 0;
+  padding: 1px 8px 0;
+  color: #888888;
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid #262626;
+  border-radius: 5px;
+  font-family: "SFMono Nerd Font Mono";
+  font-size: 10px;
+}
+
+#custom-cava.updated {
+  color: #ededed;
+}
+
+#custom-cava.silent {
+  color: #333333;
+}
+
+#custom-cava:hover {
+  color: #ffffff;
+  background: #1a1a1a;
+}
+
 #privacy,
 #custom-system {
   padding: 0 9px;

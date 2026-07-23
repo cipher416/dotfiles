@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+config="${XDG_CONFIG_HOME:-$HOME/.config}/cava/waybar.conf"
+glyphs=("▁" "▂" "▃" "▄" "▅" "▆" "▇" "█")
+
+cava -p "$config" | while IFS=';' read -r -a levels; do
+  text=""
+  class="silent"
+
+  for level in "${levels[@]}"; do
+    [[ "$level" =~ ^[0-7]$ ]] || continue
+    text+="${glyphs[level]}"
+    ((level > 0)) && class="updated"
+  done
+
+  [[ -n "$text" ]] && printf '{"text":"%s","class":"%s"}\n' "$text" "$class"
+done

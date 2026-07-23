@@ -14,10 +14,12 @@ tracked_paths=(
   .config/fuzzel
   .config/mako
   .config/btop
+  .config/cava
   .config/vicinae/settings.json
   .local/bin/hypr-menu
   .local/bin/hypr-screenshot
   .local/bin/hypr-waybar-toggle
+  .local/bin/waybar-cava
   .local/share/vicinae/themes/vercel-noir.toml
 )
 

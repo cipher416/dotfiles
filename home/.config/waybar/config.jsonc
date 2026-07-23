@@ -6,7 +6,7 @@
   "on-sigusr1": "toggle",
   "on-sigusr2": "reload",
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["mpris", "clock"],
+  "modules-center": ["mpris", "custom/cava", "clock"],
   "modules-right": ["privacy", "group/telemetry", "tray", "custom/system"],
 
   "hyprland/workspaces": {
@@ -38,6 +38,13 @@
     "on-click": "playerctl play-pause",
     "on-click-middle": "playerctl previous",
     "on-click-right": "playerctl next"
+  },
+  "custom/cava": {
+    "exec": "waybar-cava",
+    "return-type": "json",
+    "restart-interval": 2,
+    "tooltip": false,
+    "on-click": "ghostty -e cava"
   },
   "group/telemetry": {
     "orientation": "horizontal",
