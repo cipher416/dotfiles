@@ -4,7 +4,19 @@ set -euo pipefail
 config="${XDG_CONFIG_HOME:-$HOME/.config}/cava/waybar.conf"
 glyphs=("▁" "▂" "▃" "▄" "▅" "▆" "▇" "█")
 
-cava -p "$config" | while IFS=';' read -r -a levels; do
+coproc cava_process { exec cava -p "$config"; }
+cava_pid=$cava_process_PID
+cava_output=${cava_process[0]}
+
+cleanup() {
+  kill "$cava_pid" 2>/dev/null || true
+  wait "$cava_pid" 2>/dev/null || true
+}
+
+trap cleanup EXIT
+trap 'exit 0' INT TERM HUP
+
+while IFS=';' read -r -a levels <&"$cava_output"; do
   text=""
   class="silent"
 

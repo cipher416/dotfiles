@@ -5,7 +5,7 @@ A monochrome, Vercel-inspired Hyprland desktop for Manjaro/Arch Linux. The setup
 ## Included
 
 - Hyprland 0.55 Lua configuration, Hyprpaper, Hyprlock, and Hypridle
-- Waybar with workspaces, MPRIS, CAVA audio visualization, telemetry, tray, and service-backed visibility toggle
+- Waybar with workspaces, MPRIS, CAVA audio visualization, Codex quota status, telemetry, tray, and service-backed visibility toggle
 - Fuzzel launcher, Mako notifications, and Btop theme
 - Vicinae settings and the custom `vercel-noir` theme
 - Screenshot, system menu, clipboard, and keybinding helper scripts

@@ -1,5 +1,6 @@
 apple-fonts
 apple_cursor
 apple_hyprcursor
+codexbar
 vicinae-bin
 zen-browser-bin

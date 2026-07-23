@@ -4,10 +4,10 @@
   "height": 32,
   "spacing": 0,
   "on-sigusr1": "toggle",
-  "on-sigusr2": "reload",
+  "on-sigusr2": "noop",
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["mpris", "custom/cava", "clock"],
-  "modules-right": ["privacy", "group/telemetry", "tray", "custom/system"],
+  "modules-right": ["custom/codexbar", "privacy", "group/telemetry", "tray", "custom/system"],
 
   "hyprland/workspaces": {
     "all-outputs": true,
@@ -81,6 +81,14 @@
     "format-muted": "󰝟",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "scroll-step": 5
+  },
+  "custom/codexbar": {
+    "exec": "codexbar",
+    "return-type": "json",
+    "interval": 300,
+    "signal": 12,
+    "tooltip": true,
+    "on-click": "xdg-open https://chatgpt.com/codex/settings/usage"
   },
   "privacy": {
     "icon-spacing": 4,

@@ -98,6 +98,24 @@ button:hover {
   border-left: 1px solid #1f1f1f;
 }
 
+#custom-codexbar {
+  margin: 4px 3px;
+  padding: 1px 8px 0;
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid #262626;
+  border-radius: 6px;
+  font-family: "SFMono Nerd Font Mono";
+  font-size: 10px;
+}
+
+#custom-codexbar:hover {
+  background: #1a1a1a;
+}
+
+#custom-codexbar.critical {
+  border-color: #e5484d;
+}
+
 #telemetry,
 #tray {
   background: rgba(10, 10, 10, 0.88);
