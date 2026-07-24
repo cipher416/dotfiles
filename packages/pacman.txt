@@ -1,4 +1,5 @@
 btop
+bluez-utils
 cava
 cliphist
 dolphin

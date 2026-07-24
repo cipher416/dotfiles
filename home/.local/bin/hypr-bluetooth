@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+controller_info="$(bluetoothctl show)"
+[[ "$controller_info" =~ Powered:[[:space:]]+(yes|no) ]] || exit 1
+powered="${BASH_REMATCH[1]}"
+
+list_devices() {
+  local address name info connected marker
+
+  printf 'power\t%s Bluetooth\n' "$(if [[ "$powered" == "yes" ]]; then printf 'Disable'; else printf 'Enable'; fi)"
+  printf 'scan\tPair new device\n'
+
+  while IFS= read -r device; do
+    [[ "$device" =~ ^Device[[:space:]]+([[:xdigit:]:]+)[[:space:]]+(.+)$ ]] || continue
+    address="${BASH_REMATCH[1]}"
+    name="${BASH_REMATCH[2]}"
+    info="$(bluetoothctl info "$address")"
+    connected="$(awk '/^[[:space:]]*Connected:/{print $2}' <<<"$info")"
+    marker="  "
+    [[ "$connected" == "yes" ]] && marker="● "
+    printf 'device:%s\t%s%s\n' "$address" "$marker" "$name"
+  done < <(bluetoothctl devices Paired)
+}
+
+list_discovered_devices() {
+  local paired address name
+
+  bluetoothctl --timeout 8 scan on >/dev/null 2>&1 || true
+  paired="$(bluetoothctl devices Paired | awk '{print $2}')"
+
+  while IFS= read -r device; do
+    [[ "$device" =~ ^Device[[:space:]]+([[:xdigit:]:]+)[[:space:]]+(.+)$ ]] || continue
+    address="${BASH_REMATCH[1]}"
+    name="${BASH_REMATCH[2]}"
+    grep -qx "$address" <<<"$paired" || printf 'pair:%s\t%s\n' "$address" "$name"
+  done < <(bluetoothctl devices)
+}
+
+pair_device() {
+  local address="$1"
+
+  ghostty -e bash -lc '
+    address="$1"
+    bluetoothctl --agent DisplayYesNo pair "$address" &&
+      bluetoothctl trust "$address" &&
+      bluetoothctl connect "$address"
+    printf "\nPress Enter to close..."
+    read -r
+  ' _ "$address"
+}
+
+if [[ "${1:-}" == "--list" ]]; then
+  list_devices
+  exit
+fi
+
+if [[ "${1:-}" == "--discover" ]]; then
+  list_discovered_devices
+  exit
+fi
+
+choice="$(
+  list_devices | fuzzel \
+    --dmenu \
+    --prompt 'Bluetooth > ' \
+    --with-nth=2 \
+    --only-match \
+    --no-sort \
+    --minimal-lines \
+    --no-run-if-empty
+)" || exit 0
+
+action="${choice%%$'\t'*}"
+label="${choice#*$'\t'}"
+
+if [[ "$action" == "power" ]]; then
+  bluetoothctl power "$(if [[ "$powered" == "yes" ]]; then printf 'off'; else printf 'on'; fi)"
+  notify-send --app-name Bluetooth "Bluetooth $(if [[ "$powered" == "yes" ]]; then printf 'disabled'; else printf 'enabled'; fi)"
+  exit
+fi
+
+if [[ "$action" == "scan" ]]; then
+  notify-send --app-name Bluetooth 'Scanning for devices' 'This takes a few seconds.'
+  choice="$(
+    list_discovered_devices | fuzzel \
+      --dmenu \
+      --prompt 'Pair > ' \
+      --with-nth=2 \
+      --only-match \
+      --no-sort \
+      --minimal-lines \
+      --no-run-if-empty
+  )" || exit 0
+
+  address="${choice%%$'\t'*}"
+  address="${address#pair:}"
+  [[ "$address" =~ ^[[:xdigit:]:]+$ ]] || exit 1
+  pair_device "$address"
+  exit
+fi
+
+address="${action#device:}"
+[[ "$address" =~ ^[[:xdigit:]:]+$ ]] || exit 1
+
+info="$(bluetoothctl info "$address")"
+connected="$(awk '/^[[:space:]]*Connected:/{print $2}' <<<"$info")"
+name="${label#"● "}"
+name="${name#"  "}"
+
+if [[ "$connected" == "yes" ]]; then
+  bluetoothctl disconnect "$address"
+  notify-send --app-name Bluetooth 'Device disconnected' "$name"
+else
+  bluetoothctl connect "$address"
+  notify-send --app-name Bluetooth 'Device connected' "$name"
+fi

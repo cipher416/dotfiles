@@ -6,6 +6,7 @@ show_system() {
   choice="$(printf '%s\n' \
     'Lock' \
     'Clipboard' \
+    'Bluetooth' \
     'Keybindings' \
     'Suspend' \
     'Log out' \
@@ -15,6 +16,7 @@ show_system() {
   case "$choice" in
     Lock) hyprlock ;;
     Clipboard) show_clipboard ;;
+    Bluetooth) hypr-bluetooth ;;
     Keybindings) show_keybindings ;;
     Suspend) systemctl suspend ;;
     'Log out') uwsm stop ;;

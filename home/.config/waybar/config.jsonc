@@ -7,7 +7,7 @@
   "on-sigusr2": "noop",
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["mpris", "custom/cava", "clock"],
-  "modules-right": ["privacy", "group/telemetry", "tray", "custom/system"],
+  "modules-right": ["privacy", "bluetooth", "group/telemetry", "tray", "custom/system"],
 
   "hyprland/workspaces": {
     "all-outputs": true,
@@ -90,6 +90,17 @@
     "signal": 12,
     "tooltip": true,
     "on-click": "xdg-open https://chatgpt.com/codex/settings/usage"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "",
+    "format-connected-battery": " {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
+    "on-click": "hypr-bluetooth"
   },
   "privacy": {
     "icon-spacing": 4,

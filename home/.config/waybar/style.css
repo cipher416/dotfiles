@@ -93,9 +93,23 @@ button:hover {
 }
 
 #privacy,
+#bluetooth,
 #custom-system {
   padding: 0 9px;
   border-left: 1px solid #1f1f1f;
+}
+
+#bluetooth {
+  color: #888888;
+}
+
+#bluetooth.connected {
+  color: #ededed;
+}
+
+#bluetooth:hover {
+  color: #ffffff;
+  background: #1a1a1a;
 }
 
 #custom-codexbar {
