@@ -99,11 +99,11 @@ button:hover {
 }
 
 #custom-codexbar {
-  margin: 4px 3px;
+  margin: 0;
   padding: 1px 8px 0;
-  background: rgba(10, 10, 10, 0.88);
-  border: 1px solid #262626;
-  border-radius: 6px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
   font-family: "SFMono Nerd Font Mono";
   font-size: 10px;
 }
@@ -114,6 +114,13 @@ button:hover {
 
 #custom-codexbar.critical {
   border-color: #e5484d;
+}
+
+#cpu,
+#memory,
+#network,
+#wireplumber {
+  border-left: 1px solid #1f1f1f;
 }
 
 #telemetry,
@@ -152,19 +159,22 @@ button:hover {
 #custom-system {
   font-family: "SFMono Nerd Font Mono";
   font-size: 14px;
-  color: #000000;
-  background: #ededed;
+  color: #888888;
+  background: #0a0a0a;
+  border: 1px solid #262626;
   font-weight: 700;
   margin: 4px 6px 4px 4px;
   border-radius: 5px;
 }
 
 #custom-system:hover {
-  background: #ffffff;
+  color: #ededed;
+  background: #1a1a1a;
+  border-color: #333333;
 }
 
 #custom-system:active {
-  background: #b4b4b4;
+  background: #262626;
 }
 
 #cpu.warning,
