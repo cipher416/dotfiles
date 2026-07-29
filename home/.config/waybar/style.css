@@ -118,8 +118,6 @@ button:hover {
   background: transparent;
   border: 0;
   border-radius: 0;
-  font-family: "SFMono Nerd Font Mono";
-  font-size: 10px;
 }
 
 #custom-codexbar:hover {

@@ -84,7 +84,7 @@
     "scroll-step": 5
   },
   "custom/codexbar": {
-    "exec": "codexbar",
+    "exec": "codexbar --color-low '#888888' --color-mid '#b4b4b4' --color-high '#d4d4d4' --color-critical '#e5484d'",
     "return-type": "json",
     "interval": 300,
     "signal": 12,
