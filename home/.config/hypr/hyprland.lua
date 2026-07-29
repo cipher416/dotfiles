@@ -220,10 +220,7 @@ hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Universal clipboard shortcuts use terminal-safe key combinations.
 local function send_shortcut_once(mods, key)
   return function()
-    hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = key, state = "down", window = "activewindow" }))
-    hl.timer(function()
-      hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = key, state = "up", window = "activewindow" }))
-    end, { timeout = 50, type = "oneshot" })
+    hl.dispatch(hl.dsp.send_shortcut({ mods = mods, key = key }))
   end
 end
 
