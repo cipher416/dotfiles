@@ -7,6 +7,7 @@ show_system() {
     'Lock' \
     'Clipboard' \
     'Bluetooth' \
+    'Brightness' \
     'Keybindings' \
     'Suspend' \
     'Log out' \
@@ -17,6 +18,7 @@ show_system() {
     Lock) hyprlock ;;
     Clipboard) show_clipboard ;;
     Bluetooth) hypr-bluetooth ;;
+    Brightness) hypr-monitor-brightness ;;
     Keybindings) show_keybindings ;;
     Suspend) systemctl suspend ;;
     'Log out') uwsm stop ;;
@@ -63,6 +65,7 @@ Super + Alt + S               Send window to scratchpad
 Super + G                     Toggle window group
 Super + C / X / V             Universal copy / cut / paste
 Super + Ctrl + V              Vicinae clipboard history
+Brightness keys               Adjust both monitors
 Super + Shift + S             Region screenshot with Hyprshot
 Print                         Region screenshot
 Shift + Print                 Full desktop screenshot

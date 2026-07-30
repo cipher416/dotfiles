@@ -2,6 +2,7 @@ btop
 bluez-utils
 cava
 cliphist
+ddcutil
 dolphin
 fontconfig
 fuzzel
