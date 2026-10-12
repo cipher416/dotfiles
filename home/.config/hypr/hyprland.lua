@@ -140,6 +140,8 @@ hl.animation({ leaf = "workspaces", enabled = false })
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 3, bezier = "easeOutQuint", style = "slidevert" })
 
 hl.on("hyprland.start", function()
+  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  hl.exec_cmd("gnome-keyring-daemon --start --components=secrets")
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("mako")
   hl.exec_cmd("hypridle")
@@ -163,6 +165,7 @@ hl.bind("SUPER + ALT + SPACE", hl.dsp.exec_cmd(home .. "/.local/bin/hypr-menu sy
 hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd(home .. "/.local/bin/hypr-menu system"))
 hl.bind("SUPER + K", hl.dsp.exec_cmd(home .. "/.local/bin/hypr-menu keybindings"))
 hl.bind("SUPER + CTRL + V", hl.dsp.exec_cmd("vicinae vicinae://launch/clipboard/history"))
+hl.bind("SUPER + CTRL + SPACE", hl.dsp.exec_cmd("vicinae vicinae://launch/core/search-emojis"))
 
 -- Window and workspace navigation.
 hl.bind("SUPER + W", hl.dsp.window.close())

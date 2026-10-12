@@ -65,6 +65,7 @@ Super + Alt + S               Send window to scratchpad
 Super + G                     Toggle window group
 Super + C / X / V             Universal copy / cut / paste
 Super + Ctrl + V              Vicinae clipboard history
+Super + Ctrl + Space          Emoji and symbol picker
 Brightness keys               Adjust both monitors
 Super + Shift + S             Region screenshot with Hyprshot
 Print                         Region screenshot

@@ -13,6 +13,7 @@ tracked_paths=(
   .config/waybar
   .config/fuzzel
   .config/mako
+  .config/uwsm/env-hyprland
   .config/btop
   .config/cava/waybar.conf
   .config/vicinae/settings.json
