@@ -7,7 +7,7 @@ flock -n 9 || exit 0
 display_name() {
   case "$1" in
     1) printf 'HDMI-A-2 - ASUS VG249QL3A' ;;
-    2) printf 'DP-5 - Acer VG240Y' ;;
+    2) printf 'DP-6 - MSI MAG 275QF E21' ;;
   esac
 }
 

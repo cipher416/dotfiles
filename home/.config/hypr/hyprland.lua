@@ -4,7 +4,7 @@ local menu = "vicinae toggle"
 local file_manager = "dolphin"
 local browser = "gtk-launch app.zen_browser.zen"
 
--- Preserve the current KDE display layout, with a fallback for other displays.
+-- MSI on the left, ASUS on the right, with a fallback for other displays.
 hl.monitor({
   output = "",
   mode = "preferred",
@@ -15,16 +15,21 @@ hl.monitor({
 hl.monitor({
   output = "HDMI-A-2",
   mode = "highrr",
+  position = "2560x0",
+  scale = 1,
+  transform = 3,
+})
+
+hl.monitor({
+  output = "DP-6",
+  mode = "preferred",
   position = "0x0",
   scale = 1,
 })
 
-hl.monitor({
-  output = "DP-5",
-  mode = "preferred",
-  position = "1920x0",
-  scale = 1,
-})
+-- Main workspace on MSI; secondary workspace on ASUS.
+hl.workspace_rule({ workspace = "1", monitor = "DP-6", default = true })
+hl.workspace_rule({ workspace = "2", monitor = "HDMI-A-2", default = true })
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "macOS")
@@ -109,6 +114,7 @@ hl.config({
   },
 
   cursor = {
+    default_monitor = "DP-6",
     hide_on_key_press = true,
     warp_on_change_workspace = 1,
   },
@@ -140,6 +146,8 @@ hl.animation({ leaf = "workspaces", enabled = false })
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 3, bezier = "easeOutQuint", style = "slidevert" })
 
 hl.on("hyprland.start", function()
+  hl.dispatch(hl.dsp.focus({ workspace = "1" }))
+  hl.exec_cmd("xrandr --output DP-6 --primary")
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("gnome-keyring-daemon --start --components=secrets")
   hl.exec_cmd("hyprpaper")
@@ -166,7 +174,7 @@ hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd(home .. "/.local/bin/hypr-menu system"
 hl.bind("SUPER + K", hl.dsp.exec_cmd(home .. "/.local/bin/hypr-menu keybindings"))
 hl.bind("SUPER + CTRL + V", hl.dsp.exec_cmd("vicinae vicinae://launch/clipboard/history"))
 hl.bind("SUPER + CTRL + SPACE", hl.dsp.exec_cmd("vicinae vicinae://launch/core/search-emojis"))
-
+hl.bind("CTRL + SHIFT + 2", hl.dsp.global("com.t3tools.T3Code:capture-window"))
 -- Window and workspace navigation.
 hl.bind("SUPER + W", hl.dsp.window.close())
 hl.bind("SUPER + T", hl.dsp.window.float({ action = "toggle" }))

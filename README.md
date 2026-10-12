@@ -33,8 +33,8 @@ After installation, log out and select **Hyprland (uwsm-managed)** in SDDM. Wayb
 
 `home/.config/hypr/hyprland.lua` preserves this workstation's monitor topology:
 
-- `HDMI-A-2` at `0x0`, highest refresh rate
-- `DP-5` at `1920x0`, preferred mode
+- `DP-6` (MSI MAG 275QF E21) at `0x0`, preferred mode, main workspace 1
+- `HDMI-A-2` (ASUS VG249QL3A) at `2560x0`, highest refresh rate, rotated 270°, workspace 2
 - A generic fallback for any other display
 
 Adjust those monitor blocks before installing on different hardware. The config assumes `ghostty`, `dolphin`, Zen Browser, Zed, Cursor, and Lazydocker for application shortcuts.
@@ -45,6 +45,10 @@ Adjust those monitor blocks before installing on different hardware. The config 
 | --- | --- |
 | `Super + Space` | Vicinae |
 | `Super + R` | Fuzzel |
+| `Super + Alt + Space` | System menu, including brightness controls |
+| `Super + Ctrl + Space` | Emoji and symbol picker |
+| Brightness keys | Adjust both monitors by 5% |
+| `Ctrl + Shift + 2` | T3 Code window capture |
 | `Super + Return` | Terminal |
 | `Super + W` | Close window |
 | `Super + F` | Fullscreen |
