@@ -7,8 +7,8 @@
   "on-sigusr2": "reload",
   "modules-left": [
     "custom/system",
-    "hyprland/window",
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "hyprland/window"
   ],
   "modules-center": [
     "mpris",
