@@ -1,14 +1,28 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 32,
+  "height": 30,
   "spacing": 0,
   "on-sigusr1": "toggle",
-  "on-sigusr2": "noop",
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["mpris", "custom/cava", "clock"],
-  "modules-right": ["privacy", "bluetooth", "group/telemetry", "tray", "custom/system"],
-
+  "on-sigusr2": "reload",
+  "modules-left": [
+    "custom/system",
+    "hyprland/window",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "mpris",
+    "custom/cava"
+  ],
+  "modules-right": [
+    "privacy",
+    "tray",
+    "bluetooth",
+    "network",
+    "wireplumber",
+    "group/telemetry",
+    "clock"
+  ],
   "hyprland/workspaces": {
     "all-outputs": true,
     "active-only": false,
@@ -17,11 +31,11 @@
   },
   "hyprland/window": {
     "format": "{title}",
-    "max-length": 70,
+    "max-length": 32,
     "separate-outputs": true
   },
   "clock": {
-    "format": "{:%a %H:%M}",
+    "format": "{:%a %b %d  %H:%M}",
     "format-alt": "{:%Y-%m-%d %H:%M:%S}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>"
   },
@@ -29,7 +43,7 @@
     "format": "{status_icon} {dynamic}",
     "format-paused": "{status_icon} {dynamic}",
     "tooltip-format": "{player}: {dynamic}",
-    "max-length": 48,
+    "max-length": 30,
     "status-icons": {
       "playing": "▶",
       "paused": "Ⅱ",
@@ -48,7 +62,17 @@
   },
   "group/telemetry": {
     "orientation": "horizontal",
-    "modules": ["custom/codexbar", "cpu", "memory", "network", "wireplumber"]
+    "drawer": {
+      "transition-duration": 180,
+      "transition-left-to-right": false,
+      "children-class": "telemetry-detail"
+    },
+    "modules": [
+      "custom/control-center",
+      "custom/codexbar",
+      "cpu",
+      "memory"
+    ]
   },
   "cpu": {
     "interval": 3,
@@ -70,18 +94,25 @@
   },
   "network": {
     "interval": 5,
-    "format-wifi": " {signalStrength}%",
+    "format-wifi": "",
     "format-ethernet": "󰈀",
     "format-linked": "󰈀",
     "format-disconnected": "󰖪",
-    "tooltip-format": "{ifname}: {ipaddr}"
+    "tooltip-format": "{ifname}: {ipaddr}",
+    "tooltip-format-wifi": "{essid} · {signalStrength}%\n{ifname}: {ipaddr}"
   },
   "wireplumber": {
-    "format": " {volume}%",
+    "format": "{icon}",
     "format-muted": "󰝟",
     "on-click": "hypr-audio-output",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "scroll-step": 5
+    "scroll-step": 5,
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
+    "tooltip-format": "Volume: {volume}% · click to choose output"
   },
   "custom/codexbar": {
     "exec": "codexbar --color-low '#888888' --color-mid '#b4b4b4' --color-high '#d4d4d4' --color-critical '#e5484d'",
@@ -111,8 +142,14 @@
     "spacing": 8
   },
   "custom/system": {
-    "format": "",
-    "tooltip": false,
-    "on-click": "hypr-menu system"
+    "format": "󰀻",
+    "tooltip": true,
+    "on-click": "hypr-menu system",
+    "tooltip-format": "System menu"
+  },
+  "reload_style_on_change": true,
+  "custom/control-center": {
+    "format": "󰒓",
+    "tooltip-format": "Control Center · hover for Codex usage, CPU and memory"
   }
 }
